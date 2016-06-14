@@ -1,7 +1,9 @@
-import random, unittest, cPickle, collections
+from __future__ import absolute_import
+import random, unittest, six.moves.cPickle, collections
 from copy import deepcopy, copy
 from pylpsolve import LP, LPException
 from numpy import array as ar, ones, eye, float64, uint
+import six
 
 
 ############################################################
@@ -76,7 +78,7 @@ class TestConvenience(unittest.TestCase):
 
             d = lp.getSolutionDict()
 
-            self.assert_(set(d.iterkeys()) == set(["a", "b"]))
+            self.assert_(set(six.iterkeys(d)) == set(["a", "b"]))
 
             self.assertAlmostEqual(d["a"][0], 1)
             self.assertAlmostEqual(d["a"][1], 0)
@@ -329,7 +331,7 @@ class TestConvenience(unittest.TestCase):
 
             d = lp.getSolutionDict()
 
-            self.assert_(set(d.iterkeys()) == set(["a", "b"]))
+            self.assert_(set(six.iterkeys(d)) == set(["a", "b"]))
 
             self.assertAlmostEqual(d["a"][0], v0)
             self.assertAlmostEqual(d["a"][1], 0)

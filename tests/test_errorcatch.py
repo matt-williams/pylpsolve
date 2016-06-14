@@ -1,4 +1,5 @@
-import random, unittest, cPickle, collections
+from __future__ import absolute_import
+import random, unittest, six.moves.cPickle, collections
 from copy import deepcopy, copy
 from pylpsolve import LP, LPException
 from numpy import array as ar, ones, eye, float64, uint, int, ones
@@ -90,7 +91,7 @@ class TestErrorCatch(unittest.TestCase):
                 cd = [("a", wl[:2]), ( (2,3), wl[2:])]
                 od = [("a", ol[:2]), ( (2,3), ol[2:])]
             
-            elif opts[1] in indices.keys() and opts[2] in weights.keys():
+            elif opts[1] in list(indices.keys()) and opts[2] in list(weights.keys()):
 
                 if "N" in opts:
                     lp.getIndexBlock(indices["N"], 3)
@@ -314,7 +315,7 @@ class TestErrorCatch(unittest.TestCase):
                 cd = [("a", wl[:2]), ( (2,5), wl[2:])]
                 od = [("a", ol[:2]), ( (2,5), ol[2:])]
             
-            elif opts[1] in indices.keys() and opts[2] in weights.keys():
+            elif opts[1] in list(indices.keys()) and opts[2] in list(weights.keys()):
 
                 if "N" in opts:
                     lp.getIndexBlock(indices["N"], 5)

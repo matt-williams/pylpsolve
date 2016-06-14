@@ -72,10 +72,13 @@ TODO
 
 """
 
+from __future__ import absolute_import
 import sys, os, glob, shutil, imp, warnings, cStringIO, re, textwrap, traceback
 import sphinx
 
 import warnings
+from six.moves import map
+from six.moves import range
 warnings.warn("A plot_directive module is also available under "
               "matplotlib.sphinxext; expect this numpydoc.plot_directive "
               "module to be deprecated after relevant features have been "
@@ -250,7 +253,7 @@ def run(arguments, content, options, state_machine, state, lineno):
 
     # is it in doctest format?
     is_doctest = contains_doctest(code)
-    if options.has_key('format'):
+    if 'format' in options:
         if options['format'] == 'python':
             is_doctest = False
         else:
@@ -283,7 +286,7 @@ def run(arguments, content, options, state_machine, state, lineno):
     try:
         images = makefig(code, source_file_name, build_dir, output_base,
                          config)
-    except PlotError, err:
+    except PlotError as err:
         reporter = state.memo.reporter
         sm = reporter.system_message(
             3, "Exception occurred in plotting %s: %s" % (output_base, err),
@@ -414,9 +417,9 @@ def run_code(code, code_path):
         try:
             code = unescape_doctest(code)
             ns = {}
-            exec setup.config.plot_pre_code in ns
-            exec code in ns
-        except (Exception, SystemExit), err:
+            exec(setup.config.plot_pre_code, ns)
+            exec(code, ns)
+        except (Exception, SystemExit) as err:
             raise PlotError(traceback.format_exc())
     finally:
         os.chdir(pwd)
@@ -474,7 +477,7 @@ def makefig(code, code_path, output_dir, output_base, config):
     # Then look for multi-figure output files
     images = []
     all_exists = True
-    for i in xrange(1000):
+    for i in range(1000):
         img = ImageFile('%s_%02d' % (output_base, i), output_dir)
         for format, dpi in formats:
             if out_of_date(code_path, img.filename(format)):
@@ -512,7 +515,7 @@ def makefig(code, code_path, output_dir, output_base, config):
         for format, dpi in formats:
             try:
                 figman.canvas.figure.savefig(img.filename(format), dpi=dpi)
-            except exceptions.BaseException, err:
+            except exceptions.BaseException as err:
                 raise PlotError(traceback.format_exc())
             img.formats.append(format)
 
@@ -534,23 +537,23 @@ except ImportError:
         """
 
         if not os.path.exists(target):
-            raise OSError, 'Target does not exist: '+target
+            raise OSError('Target does not exist: '+target)
 
         if not os.path.isdir(base):
-            raise OSError, 'Base is not a directory or does not exist: '+base
+            raise OSError('Base is not a directory or does not exist: '+base)
 
         base_list = (os.path.abspath(base)).split(os.sep)
         target_list = (os.path.abspath(target)).split(os.sep)
 
         # On the windows platform the target may be on a completely
         # different drive from the base.
-        if os.name in ['nt','dos','os2'] and base_list[0] <> target_list[0]:
-            raise OSError, 'Target is on a different drive to base. Target: '+target_list[0].upper()+', base: '+base_list[0].upper()
+        if os.name in ['nt','dos','os2'] and base_list[0] != target_list[0]:
+            raise OSError('Target is on a different drive to base. Target: '+target_list[0].upper()+', base: '+base_list[0].upper())
 
         # Starting from the filepath root, work out how much of the
         # filepath is shared by base and target.
         for i in range(min(len(base_list), len(target_list))):
-            if base_list[i] <> target_list[i]: break
+            if base_list[i] != target_list[i]: break
         else:
             # If we broke out of the loop, i is pointing to the first
             # differing path elements.  If we didn't break out of the

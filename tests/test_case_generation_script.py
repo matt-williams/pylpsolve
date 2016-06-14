@@ -1,6 +1,8 @@
 # This is just a handy little script that prints out all the possible
 # combinations of test cases.
 
+from __future__ import absolute_import
+from __future__ import print_function
 from itertools import product
 
 V = ["dl",
@@ -20,9 +22,9 @@ for i, t in enumerate(product(*V)):
 	continue
      
     if i % (len(V[-1])) == 0:
-	print ""
+	print("")
 
     s = "".join(t)
-    print "    def test%s_%s(self): self.check%s(\"%s\")" % (title,s,title,s)
+    print("    def test%s_%s(self): self.check%s(\"%s\")" % (title,s,title,s))
 
 

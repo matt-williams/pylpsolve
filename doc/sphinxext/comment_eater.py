@@ -1,10 +1,12 @@
+from __future__ import absolute_import
 from cStringIO import StringIO
 import compiler
 import inspect
 import textwrap
 import tokenize
 
-from compiler_unparse import unparse
+from .compiler_unparse import unparse
+from six.moves import zip
 
 
 class Comment(object):

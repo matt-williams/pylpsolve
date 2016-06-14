@@ -14,11 +14,13 @@ Example Makefile rule::
             ./ext/autosummary_generate.py -o source/generated source/*.rst
 
 """
+from __future__ import absolute_import
+from __future__ import print_function
 import glob, re, inspect, os, optparse, pydoc
-from autosummary import import_by_name
+from .autosummary import import_by_name
 
 try:
-    from phantom_import import import_phantom_module
+    from .phantom_import import import_phantom_module
 except ImportError:
     import_phantom_module = lambda x: x
 
@@ -58,8 +60,8 @@ def main():
 
         try:
             obj, name = import_by_name(name)
-        except ImportError, e:
-            print "Failed to import '%s': %s" % (name, e)
+        except ImportError as e:
+            print("Failed to import '%s': %s" % (name, e))
             continue
 
         fn = os.path.join(path, '%s.rst' % name)
@@ -127,8 +129,8 @@ def get_documented_in_docstring(name, module=None, filename=None):
         return get_documented_in_lines(lines, module=name, filename=filename)
     except AttributeError:
         pass
-    except ImportError, e:
-        print "Failed to import '%s': %s" % (name, e)
+    except ImportError as e:
+        print("Failed to import '%s': %s" % (name, e))
     return {}
 
 def get_documented_in_lines(lines, module=None, filename=None):

@@ -16,10 +16,13 @@ It will:
 
 """
 
+from __future__ import absolute_import
+from __future__ import print_function
 import os, re, pydoc
-from docscrape_sphinx import get_doc_object, SphinxDocString
+from .docscrape_sphinx import get_doc_object, SphinxDocString
 from sphinx.util.compat import Directive
 import inspect
+import six
 
 def mangle_docstrings(app, what, name, obj, options, lines,
                       reference_offset=[0]):
@@ -34,7 +37,7 @@ def mangle_docstrings(app, what, name, obj, options, lines,
         lines[:] = title_re.sub(u'', u"\n".join(lines)).split(u"\n")
     else:
         doc = get_doc_object(obj, what, u"\n".join(lines), config=cfg)
-        lines[:] = unicode(doc).split(u"\n")
+        lines[:] = six.text_type(doc).split(u"\n")
 
     if app.config.numpydoc_edit_link and hasattr(obj, '__name__') and \
            obj.__name__:
@@ -183,7 +186,7 @@ def monkeypatch_sphinx_ext_autodoc():
     if sphinx.ext.autodoc.format_signature is our_format_signature:
         return
 
-    print "[numpydoc] Monkeypatching sphinx.ext.autodoc ..."
+    print("[numpydoc] Monkeypatching sphinx.ext.autodoc ...")
     _original_format_signature = sphinx.ext.autodoc.format_signature
     sphinx.ext.autodoc.format_signature = our_format_signature
 

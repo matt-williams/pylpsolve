@@ -11,9 +11,11 @@
            them is about 6 times faster than compiler.compile.
 """
 
+from __future__ import absolute_import
 import sys
 import cStringIO
 from compiler.ast import Const, Name, Tuple, Div, Mul, Sub, Add
+from six.moves import zip
 
 def unparse(ast, single_line_functions=False):
     s = cStringIO.StringIO()
@@ -504,7 +506,7 @@ class UnparseCompilerAst:
         # Check if parenthesis are needed on left side and then dispatch
         has_paren = False
         left_class = str(t.left.__class__)
-        if (left_class in op_precedence.keys() and
+        if (left_class in list(op_precedence.keys()) and
             op_precedence[left_class] < op_precedence[str(t.__class__)]):
             has_paren = True
         if has_paren:
@@ -517,7 +519,7 @@ class UnparseCompilerAst:
         # Check if parenthesis are needed on the right side and then dispatch
         has_paren = False
         right_class = str(t.right.__class__)
-        if (right_class in op_precedence.keys() and
+        if (right_class in list(op_precedence.keys()) and
             op_precedence[right_class] < op_precedence[str(t.__class__)]):
             has_paren = True
         if has_paren:

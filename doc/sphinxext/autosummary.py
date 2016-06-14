@@ -50,6 +50,7 @@ resolved to a Python object, and otherwise it becomes simple emphasis.
 This can be used as the default role to make links 'smart'.
 
 """
+from __future__ import absolute_import
 import sys, os, posixpath, re
 
 from docutils.parsers.rst import directives
@@ -59,9 +60,11 @@ from docutils import nodes
 import sphinx.addnodes, sphinx.roles
 from sphinx.util import patfilter
 
-from docscrape_sphinx import get_doc_object
+from .docscrape_sphinx import get_doc_object
 
 import warnings
+import six
+from six.moves import range
 warnings.warn(
     "The numpydoc.autosummary extension can also be found as "
     "sphinx.ext.autosummary in Sphinx >= 0.6, and the version in "
@@ -250,7 +253,7 @@ def get_autosummary(names, state, no_signatures=False):
             else:
                 sig = re.sub(r'(\(.{16,16}[^,]*?),.*?\)', r'\1, ...)', sig)
             # make signature contain non-breaking spaces
-            col1 += u"\\ \u00a0" + unicode(sig).replace(u" ", u"\u00a0")
+            col1 += u"\\ \u00a0" + six.text_type(sig).replace(u" ", u"\u00a0")
         col2 = title
         append_row(col1, col2)
 
@@ -302,7 +305,7 @@ def _import_by_name(name):
         # ... then as MODNAME, MODNAME.OBJ1, MODNAME.OBJ1.OBJ2, ...
         last_j = 0
         modname = None
-        for j in reversed(range(1, len(name_parts)+1)):
+        for j in reversed(list(range(1, len(name_parts)+1))):
             last_j = j
             modname = '.'.join(name_parts[:j])
             try:
@@ -319,7 +322,7 @@ def _import_by_name(name):
             return obj
         else:
             return sys.modules[modname]
-    except (ValueError, ImportError, AttributeError, KeyError), e:
+    except (ValueError, ImportError, AttributeError, KeyError) as e:
         raise ImportError(e)
 
 #------------------------------------------------------------------------------

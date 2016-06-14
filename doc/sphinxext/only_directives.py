@@ -3,6 +3,7 @@
 # either html or latex.
 #
 
+from __future__ import absolute_import
 from docutils.nodes import Body, Element
 from docutils.writers.html4css1 import HTMLTranslator
 try:

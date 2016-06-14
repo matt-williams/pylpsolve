@@ -1,7 +1,11 @@
-import random, unittest, cPickle, collections
+from __future__ import absolute_import
+import random, unittest, six.moves.cPickle, collections
 from copy import deepcopy, copy
 from pylpsolve import LP, LPException
 from numpy import array as ar, ones, eye, float64, uint
+import six
+from six.moves import range
+from six.moves import zip
 
 # TODO:
 
@@ -202,7 +206,7 @@ class TestMinimal(unittest.TestCase):
                 cd = [("a", wl[:2]), ( (2,3), wl[2])]
                 od = [("a", ol[:2]), ( (2,3), ol[2])]
             
-            elif opts[1] in indices.keys() and opts[2] in weights.keys():
+            elif opts[1] in list(indices.keys()) and opts[2] in list(weights.keys()):
                 cd = [(indices[opts[1]], weights[opts[2]])]
                 od = [(indices[opts[1]], obj_func[opts[2]])]
             else:
@@ -483,7 +487,7 @@ class TestTwoLevel(unittest.TestCase):
                     cd = [(n1, wl[:2]), ((t+2,t+3), wl[2])]
                     od = [(n1, ol[:2]), ((t+2,t+3), wl[2])]
 
-                elif opts[1] in indices.keys() and opts[2] in weights.keys():
+                elif opts[1] in list(indices.keys()) and opts[2] in list(weights.keys()):
                     cd = [(indices[opts[1]], weights[opts[2]])]
                     od = [(indices[opts[1]], obj_func[opts[2]])]
 
@@ -521,7 +525,7 @@ class TestTwoLevel(unittest.TestCase):
             self.assertAlmostEqual(lp.getObjectiveValue(), 2)
 
             if disable_regular_check:
-                for k, l in register_check.iteritems():
+                for k, l in six.iteritems(register_check):
                     v = lp.getSolution(k)
                     self.assert_(len(v) == len(l))
                     for i1,i2 in zip(l,v):
@@ -541,7 +545,7 @@ class TestTwoLevel(unittest.TestCase):
 
                     d = lp.getSolutionDict()
 
-                    self.assert_(set(d.iterkeys()) == set(["a", "b"]))
+                    self.assert_(set(six.iterkeys(d)) == set(["a", "b"]))
 
                     self.assertAlmostEqual(d["a"][0], 1)
                     self.assertAlmostEqual(d["a"][1], 0)

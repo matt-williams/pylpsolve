@@ -1,7 +1,9 @@
-import random, unittest, cPickle, collections
+from __future__ import absolute_import
+import random, unittest, six.moves.cPickle, collections
 from copy import deepcopy, copy
 from pylpsolve import LP, LPException
 from numpy import array as ar, ones, eye, float64, uint, inf
+from six.moves import range
 
 class TestBounds(unittest.TestCase):
     

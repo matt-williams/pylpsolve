@@ -60,7 +60,16 @@ ctypedef double real
 ############################################################
 # Miscilaneous utility functions for resolving types
 
-from types import IntType, LongType, FloatType
+try:
+    from types import IntType, LongType, FloatType
+except ImportError:
+    # Python 3 has eliminated these.
+    # Various guides suggest using the built-ins instead:
+    # http://www.diveintopython3.net/porting-code-to-python-3-with-2to3.html
+    IntType = int
+    LongType = int
+    FloatType = float
+
 from numpy import isscalar
 
 cdef inline isnumeric(v):

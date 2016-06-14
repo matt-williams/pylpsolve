@@ -15,7 +15,7 @@ from six.moves import zip
 class TestBasic(unittest.TestCase):
     def test01_basic_full(self):
         # test singleton
-        
+
         lp = LP()
 
         lp.addConstraint( [1], ">", 1)
@@ -32,9 +32,9 @@ class TestBasic(unittest.TestCase):
 
     def test01_basic_partial(self):
         # test singleton
-        
+
         lp = LP()
-        
+
         lp.addConstraint( (ar([0]), ar([1])) , ">", 1)
         lp.setObjective( [1], mode = "minimize")
         lp.solve()
@@ -48,9 +48,9 @@ class TestBasic(unittest.TestCase):
 
     def test01_basic_int(self):
         # test singleton
-        
+
         lp = LP()
-        
+
         lp.addConstraint( ([0], [1]) , "<", 1.5)
         lp.setInteger( [0] )
         lp.setObjective( ([0], [1]), mode = "maximize")
@@ -66,9 +66,9 @@ class TestBasic(unittest.TestCase):
 
     def test01_basic_binary(self):
         # test singleton
-        
+
         lp = LP()
-        
+
         lp.addConstraint( ([0], [1]) , ">", 0.5)
         lp.setInteger( [0] )
         lp.setObjective( ([0], [1]), mode = "minimize")
@@ -84,7 +84,7 @@ class TestBasic(unittest.TestCase):
 
     def test01_basic_secondcol(self):
         # test singleton
-        
+
         lp = LP()
 
         lp.addConstraint( ([1], [1]), ">", 1)
@@ -146,7 +146,7 @@ class TestBasic(unittest.TestCase):
 class TestMinimal(unittest.TestCase):
 
     def checkMinLP1(self, opts):
-        
+
         lp = LP()
 
         indices = {}
@@ -193,7 +193,7 @@ class TestMinimal(unittest.TestCase):
             elif opts[1] == "2":
                 cd = [ ("a", wl[:2]), ("b", wl[2])]
                 od = [ ("a", ol[:2]), ("b", ol[2])]
-            
+
             elif opts[1] == "3":
                 cd = [((0,2), wl[:2]), (2, wl[2])]
                 od = [((0,2), ol[:2]), (2, ol[2])]
@@ -205,7 +205,7 @@ class TestMinimal(unittest.TestCase):
             elif opts[1] == "5":  # bad for out of order
                 cd = [("a", wl[:2]), ( (2,3), wl[2])]
                 od = [("a", ol[:2]), ( (2,3), ol[2])]
-            
+
             elif opts[1] in list(indices.keys()) and opts[2] in list(weights.keys()):
                 cd = [(indices[opts[1]], weights[opts[2]])]
                 od = [(indices[opts[1]], obj_func[opts[2]])]
@@ -224,7 +224,7 @@ class TestMinimal(unittest.TestCase):
                 lp.setObjective(od)
         else:
             assert len(opts) == 2
-            
+
             if opts[0] == "N":
                 lp.getIndexBlock(indices["N"], 3)
 
@@ -240,7 +240,7 @@ class TestMinimal(unittest.TestCase):
         lp.solve()
 
         self.assertAlmostEqual(lp.getObjectiveValue(), 1)
-        
+
         if opts[0] not in ["d", "T"]:
             v = lp.getSolution(indices[opts[0]])
         else:
@@ -391,7 +391,7 @@ class TestMinimal(unittest.TestCase):
 class TestTwoLevel(unittest.TestCase):
 
     def checkMinLP1(self, opts):
-        
+
         lp = LP()
 
         idxlist = [{}, {}]
@@ -470,7 +470,7 @@ class TestTwoLevel(unittest.TestCase):
                 elif opts[1] == "2":
                     cd = [ (n1, wl[:2]), (n2, wl[2])]
                     od = [ (n1, ol[:2]), (n2, ol[2])]
-                    
+
                     register_check[n1] = [1,0]
                     register_check[n2] = [0]
                     disable_regular_check = True
@@ -685,7 +685,7 @@ class TestTwoLevel(unittest.TestCase):
     def testConstraints_Trf(self): self.checkMinLP1("Trf")
     def testConstraints_Trs(self): self.checkMinLP1("Trs")
     def testConstraints_Trr(self): self.checkMinLP1("Trr")
-            
+
 
 
     ############################################################
@@ -740,7 +740,7 @@ class Test2dMatrix(unittest.TestCase):
 
         io = indices[opts[0]]
         vl = values [opts[1]]
-        
+
         if len(opts) == 3:
             tr = targets[opts[2]]
             cstr = ">="
@@ -749,7 +749,7 @@ class Test2dMatrix(unittest.TestCase):
             cstr = "in"
 
         ob = [1,2,3]
-        
+
         c_ret_idx = [0,1,2]
 
         if io is None:
@@ -792,7 +792,7 @@ class Test2dMatrix(unittest.TestCase):
     def test2DMatrix_taf(self): self.check2dMatrix("taf")
     def test2DMatrix_tar(self): self.check2dMatrix("tar")
 
-    
+
     def test2DMatrix_nLs(self): self.check2dMatrix("nLs")
     def test2DMatrix_nLl(self): self.check2dMatrix("nLl")
     def test2DMatrix_nLa(self): self.check2dMatrix("nLa")
@@ -1138,7 +1138,7 @@ class Test2dMatrixNonSquare(unittest.TestCase):
         A = [[1,0,  0],
              [0,0,  0.5],
              [0,0.5,0],
-	     [1, 0, 0]]
+         [1, 0, 0]]
 
         values = {}
         values["L"] = A
@@ -1170,7 +1170,7 @@ class Test2dMatrixNonSquare(unittest.TestCase):
 
         io = indices[opts[0]]
         vl = values [opts[1]]
-        
+
         if len(opts) == 3:
             tr = targets[opts[2]]
             cstr = ">="
@@ -1179,7 +1179,7 @@ class Test2dMatrixNonSquare(unittest.TestCase):
             cstr = "in"
 
         ob = [1,2,3]
-        
+
         c_ret_idx = [0,1,2,3]
 
         if io is None:
@@ -1222,7 +1222,7 @@ class Test2dMatrixNonSquare(unittest.TestCase):
     def test2DMatrixNonSquare_taf(self): self.check2dMatrixNonSquare("taf")
     def test2DMatrixNonSquare_tar(self): self.check2dMatrixNonSquare("tar")
 
-    
+
     def test2DMatrixNonSquare_nLs(self): self.check2dMatrixNonSquare("nLs")
     def test2DMatrixNonSquare_nLl(self): self.check2dMatrixNonSquare("nLl")
     def test2DMatrixNonSquare_nLa(self): self.check2dMatrixNonSquare("nLa")
@@ -1553,9 +1553,9 @@ class Test2dMatrixNonSquare(unittest.TestCase):
 class Test2dMatrixBlocks(unittest.TestCase):
     def check2dMatrixBlocks(self, opts):
 
-	mtypes = {}
-	mtypes["d"] = dict
-	mtypes["l"] = list
+        mtypes = {}
+        mtypes["d"] = dict
+        mtypes["l"] = list
 
         values = {}
 
@@ -1572,28 +1572,28 @@ class Test2dMatrixBlocks(unittest.TestCase):
         idx_2["N"] = "b"
         idx_2["l"] = [3,4,5]
 
-	values_1 = {}
-	values_1["s"] = 10
-	values_1["m"] = 10*ones( (4,3) )
-	values_1["a"] = 10*ones( 3 )
-	values_1["l"] = [10, 10, 10]
-	values_1["L"] = [[10, 10, 10],[10, 10, 10],[10, 10, 10],[10, 10, 10]]
-	values_1["A"] = [ar([10, 10, 10]),ar([10, 10, 10]),[10, 10, 10],[10, 10, 10]]
+        values_1 = {}
+        values_1["s"] = 10
+        values_1["m"] = 10*ones( (4,3) )
+        values_1["a"] = 10*ones( 3 )
+        values_1["l"] = [10, 10, 10]
+        values_1["L"] = [[10, 10, 10],[10, 10, 10],[10, 10, 10],[10, 10, 10]]
+        values_1["A"] = [ar([10, 10, 10]),ar([10, 10, 10]),[10, 10, 10],[10, 10, 10]]
 
-	A2 = [[0, 1, 0], [0, 0, 2], [1,0,0], [0,0,1]]
+        A2 = [[0, 1, 0], [0, 0, 2], [1,0,0], [0,0,1]]
 
-	values_2 = {}
-	values_2["L"] = A2
-	values_2["A"] = ar(A2)
+        values_2 = {}
+        values_2["L"] = A2
+        values_2["A"] = ar(A2)
 
-	constraint_rhs = {}
-	constraint_rhs["l"] = (["<=", 10], [">=", 0])
-	constraint_rhs["L"] = (["<=", [10,10,10,10]], [">=", 0])
-	constraint_rhs["B"] = ["in", [0, 10]]
-	constraint_rhs["A"] = ["in", ([0,0,0,0] , 10)]
-	
+        constraint_rhs = {}
+        constraint_rhs["l"] = (["<=", 10], [">=", 0])
+        constraint_rhs["L"] = (["<=", [10,10,10,10]], [">=", 0])
+        constraint_rhs["B"] = ["in", [0, 10]]
+        constraint_rhs["A"] = ["in", ([0,0,0,0] , 10)]
 
-	solution = ar([0,0,0, 10, 10, 5])
+
+        solution = ar([0,0,0, 10, 10, 5])
 
         lp = LP()
 
@@ -1603,31 +1603,31 @@ class Test2dMatrixBlocks(unittest.TestCase):
         if opts[2] == "N":
             lp.getIndexBlock(idx_2["N"], 3)
 
-	mtype= mtypes[opts[0]]
+        mtype= mtypes[opts[0]]
         id_1 = idx_1[opts[1]]
         id_2 = idx_2[opts[2]]
-	v_1  = values_1[opts[3]]
-	v_2  = values_2[opts[4]]
-	c_rhs= constraint_rhs[opts[5]]
+        v_1  = values_1[opts[3]]
+        v_2  = values_2[opts[4]]
+        c_rhs= constraint_rhs[opts[5]]
 
-	# print "id_1 = ", id_1
-	# print "id_2 = ", id_2
-	# print "v_1 = ", v_1
-	# print "v_2 = ", v_2
+        # print "id_1 = ", id_1
+        # print "id_2 = ", id_2
+        # print "v_1 = ", v_1
+        # print "v_2 = ", v_2
 
-	def addConstraintBlock(idx_block, c, r):
-	    ret_idx = lp.addConstraint(mtype([(id_1, v_1), (id_2, v_2)]), c, r)
-	    self.assert_(ret_idx == idx_block, "%s != %s (true)" %(str(ret_idx), str(idx_block)))
+    def addConstraintBlock(idx_block, c, r):
+        ret_idx = lp.addConstraint(mtype([(id_1, v_1), (id_2, v_2)]), c, r)
+        self.assert_(ret_idx == idx_block, "%s != %s (true)" %(str(ret_idx), str(idx_block)))
 
-	if type(c_rhs) is tuple:
-	    cr1, cr2 = c_rhs
-	    addConstraintBlock([0,1,2,3], *cr1)
-	    addConstraintBlock([4,5,6,7], *cr2)
-	else:
-	    addConstraintBlock([0,1,2,3], *c_rhs)
+        if type(c_rhs) is tuple:
+            cr1, cr2 = c_rhs
+            addConstraintBlock([0,1,2,3], *cr1)
+            addConstraintBlock([4,5,6,7], *cr2)
+        else:
+            addConstraintBlock([0,1,2,3], *c_rhs)
 
 
-	lp.setObjective([1]*6, mode = "maximize")
+        lp.setObjective([1]*6, mode = "maximize")
 
         for num_times in range(2):  # make sure it's same answer second time solving it
             lp.solve()
@@ -1636,10 +1636,10 @@ class Test2dMatrixBlocks(unittest.TestCase):
 
             v = lp.getSolution()
 
-	    self.assert_(len(v) == len(solution))
+        self.assert_(len(v) == len(solution))
 
-	    for i, s in enumerate(solution):
-		self.assertAlmostEqual(v[i], s)
+        for i, s in enumerate(solution):
+            self.assertAlmostEqual(v[i], s)
 
 
     def test2dMatrixBlocks_dttsLl(self): self.check2dMatrixBlocks("dttsLl")

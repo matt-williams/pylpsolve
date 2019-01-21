@@ -1607,7 +1607,7 @@ static char __pyx_k__pricer[] = "pricer";
 static char __pyx_k__uint32[] = "uint32";
 static char __pyx_k__uint64[] = "uint64";
 static char __pyx_k__update[] = "update";
-static char __pyx_k__IntType[] = "IntType";
+static char __pyx_k__IntType[] = "int";
 static char __pyx_k__argsort[] = "argsort";
 static char __pyx_k__asarray[] = "asarray";
 static char __pyx_k__between[] = "between";
@@ -1619,18 +1619,18 @@ static char __pyx_k__npfloat[] = "npfloat";
 static char __pyx_k__printLP[] = "printLP";
 static char __pyx_k__scaling[] = "scaling";
 static char __pyx_k__KeyError[] = "KeyError";
-static char __pyx_k__LongType[] = "LongType";
+static char __pyx_k__LongType[] = "int";
 static char __pyx_k____main__[] = "__main__";
 static char __pyx_k____test__[] = "__test__";
 static char __pyx_k__ctypestr[] = "ctypestr";
 static char __pyx_k__isfinite[] = "isfinite";
 static char __pyx_k__isscalar[] = "isscalar";
-static char __pyx_k__iterkeys[] = "iterkeys";
+static char __pyx_k__iterkeys[] = "keys";
 static char __pyx_k__maximize[] = "maximize";
 static char __pyx_k__minimize[] = "minimize";
 static char __pyx_k__warnings[] = "warnings";
 static char __pyx_k__Exception[] = "Exception";
-static char __pyx_k__FloatType[] = "FloatType";
+static char __pyx_k__FloatType[] = "float";
 static char __pyx_k__TypeError[] = "TypeError";
 static char __pyx_k__enumerate[] = "enumerate";
 static char __pyx_k__indices_1[] = "indices_1";
@@ -30493,56 +30493,9 @@ PyMODINIT_FUNC PyInit_pylpsolve(void)
   if (PyObject_SetAttr(__pyx_m, __pyx_n_s__optionlookup, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pylpsolve/pylpsolve.pyx":63
- * # Miscilaneous utility functions for resolving types
- * 
- * from types import IntType, LongType, FloatType             # <<<<<<<<<<<<<<
- * from numpy import isscalar
- * 
- */
-  __pyx_t_1 = PyList_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(((PyObject *)__pyx_n_s__IntType));
-  PyList_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_n_s__IntType));
-  __Pyx_GIVEREF(((PyObject *)__pyx_n_s__IntType));
-  __Pyx_INCREF(((PyObject *)__pyx_n_s__LongType));
-  PyList_SET_ITEM(__pyx_t_1, 1, ((PyObject *)__pyx_n_s__LongType));
-  __Pyx_GIVEREF(((PyObject *)__pyx_n_s__LongType));
-  __Pyx_INCREF(((PyObject *)__pyx_n_s__FloatType));
-  PyList_SET_ITEM(__pyx_t_1, 2, ((PyObject *)__pyx_n_s__FloatType));
-  __Pyx_GIVEREF(((PyObject *)__pyx_n_s__FloatType));
-  __pyx_t_2 = __Pyx_Import(((PyObject *)__pyx_n_s__types), ((PyObject *)__pyx_t_1), -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(((PyObject *)__pyx_t_1)); __pyx_t_1 = 0;
-  __pyx_t_1 = PyObject_GetAttr(__pyx_t_2, __pyx_n_s__IntType);
-  if (__pyx_t_1 == NULL) {
-    if (PyErr_ExceptionMatches(PyExc_AttributeError)) __Pyx_RaiseImportError(__pyx_n_s__IntType);
-    if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s__IntType, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyObject_GetAttr(__pyx_t_2, __pyx_n_s__LongType);
-  if (__pyx_t_1 == NULL) {
-    if (PyErr_ExceptionMatches(PyExc_AttributeError)) __Pyx_RaiseImportError(__pyx_n_s__LongType);
-    if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s__LongType, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyObject_GetAttr(__pyx_t_2, __pyx_n_s__FloatType);
-  if (__pyx_t_1 == NULL) {
-    if (PyErr_ExceptionMatches(PyExc_AttributeError)) __Pyx_RaiseImportError(__pyx_n_s__FloatType);
-    if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  }
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s__FloatType, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
   /* "pylpsolve/pylpsolve.pyx":64
  * 
- * from types import IntType, LongType, FloatType
+ *
  * from numpy import isscalar             # <<<<<<<<<<<<<<
  * 
  * cdef inline isnumeric(v):
@@ -31711,12 +31664,12 @@ static int __Pyx_GetException(PyObject **type, PyObject **value, PyObject **tb) 
     *value = local_value;
     *tb = local_tb;
 #if CYTHON_COMPILING_IN_CPYTHON
-    tmp_type = tstate->exc_type;
-    tmp_value = tstate->exc_value;
-    tmp_tb = tstate->exc_traceback;
-    tstate->exc_type = local_type;
-    tstate->exc_value = local_value;
-    tstate->exc_traceback = local_tb;
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = local_type;
+    tstate->curexc_value = local_value;
+    tstate->curexc_traceback = local_tb;
     /* Make sure tstate is in a consistent state when we XDECREF
        these objects (DECREF may run arbitrary code). */
     Py_XDECREF(tmp_type);
@@ -32313,9 +32266,9 @@ static void __Pyx_RaiseBufferIndexError(int axis) {
 static CYTHON_INLINE void __Pyx_ExceptionSave(PyObject **type, PyObject **value, PyObject **tb) {
 #if CYTHON_COMPILING_IN_CPYTHON
     PyThreadState *tstate = PyThreadState_GET();
-    *type = tstate->exc_type;
-    *value = tstate->exc_value;
-    *tb = tstate->exc_traceback;
+    *type = tstate->curexc_type;
+    *value = tstate->curexc_value;
+    *tb = tstate->curexc_traceback;
     Py_XINCREF(*type);
     Py_XINCREF(*value);
     Py_XINCREF(*tb);
@@ -32327,12 +32280,12 @@ static void __Pyx_ExceptionReset(PyObject *type, PyObject *value, PyObject *tb) 
 #if CYTHON_COMPILING_IN_CPYTHON
     PyObject *tmp_type, *tmp_value, *tmp_tb;
     PyThreadState *tstate = PyThreadState_GET();
-    tmp_type = tstate->exc_type;
-    tmp_value = tstate->exc_value;
-    tmp_tb = tstate->exc_traceback;
-    tstate->exc_type = type;
-    tstate->exc_value = value;
-    tstate->exc_traceback = tb;
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = type;
+    tstate->curexc_value = value;
+    tstate->curexc_traceback = tb;
     Py_XDECREF(tmp_type);
     Py_XDECREF(tmp_value);
     Py_XDECREF(tmp_tb);
